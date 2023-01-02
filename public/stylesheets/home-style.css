@@ -65,16 +65,24 @@ body {
     padding: 1rem 2rem;
 }
 
-.weather-status-div{
+.weather-icon{
     padding: 2rem 2rem;
     font-size: 2rem;
 }
+.weather-icon img{
+    height: 180px;
+    width: 180px;
+}
 
 .weather-data{
-    padding: 2rem 2rem;
+    padding: 1rem 2rem;
     font-size:1.5rem;
 }
 
 .weather-data p{
     margin: 0 !important;
+}
+
+.weather-status{
+    padding: 2rem 1rem;
 }
