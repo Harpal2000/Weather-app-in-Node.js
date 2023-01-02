@@ -8,6 +8,9 @@ const divWindSpeed = document.querySelector(".wind-speed")
 const divPressure = document.querySelector(".pressure")
 const searchBtn = document.querySelector("#search-button")
 const searchCity = document.querySelector("#search-city")
+const todayDate = document.querySelector(".current-date")
+const todayTime = document.querySelector(".current-time")
+const sunSetTime = document.querySelector(".sun-set")
 
 
 
@@ -39,7 +42,7 @@ async function getCity(city) {
             let data = await response.json();
             return data;
         })
-        .then(async function (data){
+        .then(async function (data) {
             getWeather(data)
         })
 }
@@ -60,15 +63,16 @@ function setPosition(position) {
 }
 
 async function getUserLocation(latitude, longitude) {
-    console.log(latitude,longitude);
+    console.log(latitude, longitude);
     let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&cnt=${cnt}&appid=${key}`;
     await fetch(api)
         .then(async function (response) {
+            console.log("data", api)
             let data = await response.json();
             return data;
         })
-        .then(async function (data){
-            console.log("sad",data)
+        .then(async function (data) {
+            console.log("sad", data)
             getWeather(data)
         })
 }
@@ -88,20 +92,52 @@ async function getUserLocation(latitude, longitude) {
 // }
 
 async function getWeather(city) {
-    console.log("city is",city);
+    console.log("city is", city);
     let api = `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${key}`;
     await fetch(api)
-    .then(async function (response) {
-        let data = await response.json();
-        return data;
-    })
-    .then(async function (data){
-        displayWeather(data)
-    })
+        .then(async function (response) {
+            let data = await response.json();
+            return data;
+        })
+        .then(async function (data) {
+            displayWeather(data)
+        })
 }
 
 
+
+
 function displayWeather(data) {
+    let secs = data.dt;
+    console.log(secs);
+    const output = new Date(secs * 1000);
+
+    let str = String(output);
+
+    var ds = str;
+    var date = (ds.substr(0, 7));
+    var date1 = (ds.substr(10, 11));
+    var j = date + date1;
+    var finalR = j.substr(0, 12);
+
+    let angle = data.wind.deg
+    function getCardinalDirection(angle) {
+        const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
+        return directions[Math.round(angle / 45) % 8];
+    }
+    let result = getCardinalDirection(angle);
+
+    let CurrentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" });
+
+    let sunSet = data.sys.sunset;
+    let s = new Date(sunSet * 1000);
+    theDate = new Date(Date.parse(s));
+    let sunsetTime = theDate.toLocaleTimeString();
+    // console.log(t);
+
+
+
+
     let temperature = Math.floor(data.main.temp - KELVIN);
     topLocation.innerHTML = ` ${data.name}, ${data.sys.country}`;
     divLocation.innerHTML = `  ${data.name}, ${data.sys.country}`;
@@ -109,7 +145,10 @@ function displayWeather(data) {
     weatherDesc.innerHTML = data.weather[0].description;
     weatherIcon.innerHTML = `<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">`;
     divHumidity.innerHTML = `${data.main.humidity} %`;
-    divWindSpeed.innerHTML = `${data.wind.speed} km/h`;
+    divWindSpeed.innerHTML = `${data.wind.speed} km/h  ` + result;
     divPressure.innerHTML = `${data.main.pressure} mBar`;
+    todayDate.innerHTML = finalR;
+    todayTime.innerHTML = CurrentTime;
+    sunSetTime.innerHTML = sunsetTime;
 
 }
