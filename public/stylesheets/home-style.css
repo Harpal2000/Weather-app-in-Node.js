@@ -1,16 +1,25 @@
 body {
-    /* background-image: url(/images/bg-1.jpg);
+    background-image: url(/images/bg-3.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
-    width: 100%; */
-    background-color: #606c38;
+    width: 100%;
+    /* background-color: #606c38; */
     backdrop-filter: blur(5px);
 }
 
-.main-nav-bar{
-    background-color: #283618;
+.main-nav-bar {
+    background-color: #001d3d;
+}
+
+.nav-2 {
+    background-color: #003566;
+    height: 2rem;
+}
+
+.footerDiv{
+    background-color: #001d3d;
 }
 
 .btn:focus,
@@ -32,13 +41,20 @@ body {
 }
 
 .nav-i {
-    padding: 0 1.5rem 0 0;
-    font-size: 1.3rem;
-    font-weight: 550;
+    /* padding: 0 1.5rem 0 0; */
+    font-size: 1.1rem;
+    /* font-weight: 510; */
 }
-.nav-i > a:hover {
-    border-bottom:2px solid white;
+
+.nav-i>a:hover {
+    margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0.125);
+    border-radius: 5px;
+    height: 2rem;
+    padding-bottom: 24px;
+    text-align: center;
 }
+
 .nav2 {
     flex-direction: row;
 }
@@ -57,37 +73,38 @@ body {
 }
 
 
-.main-div{
+.main-div {
     background-color: rgba(207, 219, 229, 0.215);
 }
 
-.second-div{
-    padding:1rem 5rem;
+.second-div {
+    padding: 1rem 5rem;
 }
 
-.city-data{
-    font-size:1.5rem;
+.city-data {
+    font-size: 1.5rem;
     padding: 1rem 2rem;
 }
 
-.weather-icon{
+.weather-icon {
     padding: 2rem 2rem;
     font-size: 2rem;
 }
-.weather-icon img{
+
+.weather-icon img {
     height: 180px;
     width: 180px;
 }
 
-.weather-data{
+.weather-data {
     padding: 1rem 2rem;
-    font-size:1.5rem;
+    font-size: 1.5rem;
 }
 
-.weather-data p{
+.weather-data p {
     margin: 0 !important;
 }
 
-.weather-status{
+.weather-status {
     padding: 2rem 1rem;
 }
