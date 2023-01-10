@@ -43,13 +43,12 @@ function showError() {
 
 async function getCity(city) {
     let api = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}`;
-    await fetch(api)
+    fetch(api)
         .then(async function (response) {
             let data = await response.json();
-            console.log("newapi", api)
             return data;
         })
-        .then(async function (data) {
+        .then(function (data) {
             getWeather(data)
         })
 }
@@ -63,51 +62,34 @@ searchBtn.addEventListener('click', (event) => {
 
 
 function setPosition(position) {
-    console.log(position)
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
     getUserLocation(latitude, longitude);
 }
 
 async function getUserLocation(latitude, longitude) {
-    console.log(latitude, longitude);
+    // console.log(latitude, longitude);
     let api = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${key}`;
-    await fetch(api)
+    fetch(api)
         .then(async function (response) {
-            // console.log("data", api)
             let data = await response.json();
             return data;
         })
-        .then(async function (data) {
-            // console.log("sad", data)
+        .then(function (data) {
             getWeather(data)
         })
 }
 
-// async function getWeather(data) {
-
-//     weather.temperature.value = Math.floor(data.main.temp - KELVIN);
-//     weather.description = data.weather[0].description;
-//     weather.iconId = data.weather[0].icon;
-//     weather.city = data.name;
-//     weather.country = data.sys.country;
-//     weather.Hum = data.main.humidity;
-//     weather.press = data.main.pressure;
-//     weather.wSpeed = data.wind.speed;
-
-//     getWeather(weather);
-// }
 
 async function getWeather(data) {
-    // console.log("city is", data);
     try {
         let api = `https://api.openweathermap.org/data/2.5/forecast?q=${data.city.name}&appid=${key}`;
-        await fetch(api)
+        fetch(api)
             .then(async function (response) {
                 let data = await response.json();
                 return data;
             })
-            .then(async function (data) {
+            .then(function (data) {
                 displayWeather(data)
             })
     } catch (e) {
@@ -119,9 +101,7 @@ async function getWeather(data) {
 
 
 function displayWeather(data) {
-    // console.log("new",data)
     let secs = data.list[0].dt;
-    // console.log(secs);
     const output = new Date(secs * 1000);
     let str = String(output);
 
@@ -144,9 +124,6 @@ function displayWeather(data) {
     let s = new Date(sunSet * 1000);
     theDate = new Date(Date.parse(s));
     let sunsetTime = theDate.toLocaleTimeString();
-    // console.log(sunSetTime);
-
-
 
 
     let temperature = Math.floor(data.list[0].main.temp - KELVIN);
@@ -164,4 +141,4 @@ function displayWeather(data) {
 
 }
 
-// getCity("Delhi")
+getCity("Delhi")

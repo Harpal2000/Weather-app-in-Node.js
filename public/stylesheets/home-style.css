@@ -18,7 +18,29 @@ body {
     height: 2rem;
 }
 
-.footerDiv{
+@media screen and (max-width: 1400px) {
+    body {
+        height: 175vh;
+    }
+
+    .navbar-collapse {
+        margin: 1.7rem 0 1rem 0;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .nav-2 {
+        background-color: #003566;
+        height: 4rem;
+    }
+
+    .nav-i {
+        padding: 0 1.5rem 0 0;
+    }
+}
+
+
+.footerDiv {
     background-color: #001d3d;
 }
 
